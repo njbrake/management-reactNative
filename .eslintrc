@@ -1,0 +1,4 @@
+{
+    "extends": "react-app"
+    "extends": “eslint-config-google”
+}
