@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import firebase from 'firebase';
 import store from './store';
 import config from './config/keys';
+import RouterComponent from './Router';
 import { Header } from './components/common';
 import LoginForm from './components/LoginForm';
 
@@ -23,10 +24,7 @@ export default class App extends Component<Props> {
 	render() {
 		return (
 			<Provider store={store}>
-				<View>
-					<Header headerText="Manager" />
-					<LoginForm />
-				</View>
+				<RouterComponent />
 			</Provider>
 		);
 	}
