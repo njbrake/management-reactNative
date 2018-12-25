@@ -15,10 +15,9 @@ export default (state = initialState, action) => {
 				error: '',
 			};
 		case 'EMPLOYEE_CREATE':
-			return {
-				...state,
-				initialState,
-			};
+			return { ...state, initialState };
+		case 'EMPLOYEE_SAVE_SUCCESS':
+			return { ...state, initialState };
 		default:
 			return state;
 	}
