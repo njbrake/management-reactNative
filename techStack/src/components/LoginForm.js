@@ -56,7 +56,7 @@ class LoginForm extends React.Component {
 					{loading ? (
 						<Spinner />
 					) : (
-						<Button onPress={this.onButtonPress.bind(this)}> Button </Button>
+						<Button onPress={this.onButtonPress.bind(this)}> Log In </Button>
 					)}
 				</CardSection>
 			</Card>
