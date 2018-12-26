@@ -1,53 +1,46 @@
-import React, { Component } from 'react';
-import { Modal, Text, TouchableHighlight, View, Alert } from 'react-native';
+import React from 'react';
+import { Modal, Text, View, Alert } from 'react-native';
 import { CardSection } from './CardSection';
 import { Button } from './Button';
 
-class Confirm extends Component {
-	state = {
-		modalVisible: false,
-	};
-
-	setModalVisible(visible) {
-		this.setState({ modalVisible: visible });
-	}
-
-	render() {
-		return (
-			<View style={{ marginTop: 22 }}>
-				<Modal
-					animationType="slide"
-					transparent={false}
-					visible={this.state.modalVisible}
-					onRequestClose={() => {
-						Alert.alert('Modal has been closed.');
-					}}
-				>
-					<View style={{ marginTop: 22 }}>
-						<View>
-							<Text>Hello World!</Text>
-
-							<TouchableHighlight
-								onPress={() => {
-									this.setModalVisible(!this.state.modalVisible);
-								}}
-							>
-								<Text>Hide Modal</Text>
-							</TouchableHighlight>
-						</View>
-					</View>
-				</Modal>
-
-				<TouchableHighlight
-					onPress={() => {
-						this.setModalVisible(true);
-					}}
-				>
-					<Text>Show Modal</Text>
-				</TouchableHighlight>
+const Confirm = ({ children, onAccept, onDecline, visible }) => {
+	return (
+		<Modal
+			animationType="slide"
+			transparent
+			visible={visible}
+			onRequestClose={() => {
+				Alert.alert('Modal has been closed.');
+			}}
+		>
+			<View style={styles.container}>
+				<CardSection style={styles.cardSection}>
+					<Text style={styles.text}> {children}</Text>
+				</CardSection>
+				<CardSection>
+					<Button onPress={onAccept}> Yes</Button>
+					<Button onPress={onDecline}> No</Button>
+				</CardSection>
 			</View>
-		);
-	}
-}
+		</Modal>
+	);
+};
 
+const styles = {
+	cardSection: {
+		justifyContent: 'center',
+	},
+	text: {
+		flex: 1,
+		fontSize: 18,
+		textAlign: 'center',
+		lineHeight: 40,
+	},
+	container: {
+		backgroundColor: 'rgba(0,0,0,0.75)',
+		position: 'relative',
+		flex: 1,
+		justifyContent: 'center',
+	},
+};
 export { Confirm };

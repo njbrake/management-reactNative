@@ -48,7 +48,7 @@ class EmployeeForm extends React.Component {
 						style={{ flex: 2 }}
 					>
 						{days.map(day => {
-							return <Picker.Item label={day} value={day} />;
+							return <Picker.Item label={day} value={day} key={day} />;
 						})}
 					</Picker>
 				</CardSection>

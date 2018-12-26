@@ -2,11 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import Communications from 'react-native-communications';
-import { Button, Card, CardSection } from './common';
+import { Button, Card, CardSection, Confirm } from './common';
 import { employeeUpdate, employeeSave } from '../actions/index';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeEdit extends React.Component {
+	state = {
+		modalVisible: false,
+	};
 	componentWillMount() {
 		_.each(this.props.employee, (value, prop) => {
 			this.props.employeeUpdate({ prop, value });
@@ -26,7 +29,15 @@ class EmployeeEdit extends React.Component {
 		Communications.text(phone, `Your upcoming shift is on ${shift}`);
 	}
 
-	onDeletePress() {}
+	onDeletePress() {
+		this.setState({ modalVisible: true });
+	}
+	onAccept() {
+		this.setState({ modalVisible: false });
+	}
+	onDecline() {
+		this.setState({ modalVisible: false });
+	}
 	render() {
 		return (
 			<Card>
@@ -38,11 +49,15 @@ class EmployeeEdit extends React.Component {
 					<Button onPress={this.onTextPress.bind(this)}> Text Employee</Button>
 				</CardSection>
 				<CardSection>
-					<Button onPress={this.onDeletePress.bind(this)}>
-						{' '}
-						Text Employee
-					</Button>
+					<Button onPress={this.onDeletePress.bind(this)}>Fire Employee</Button>
 				</CardSection>
+				<Confirm
+					visible={this.state.modalVisible}
+					onAccept={this.onAccept.bind(this)}
+					onDecline={this.onDecline.bind(this)}
+				>
+					Are you sure you want to Fire this Employee?
+				</Confirm>
 			</Card>
 		);
 	}
